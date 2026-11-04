@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* Paleta IntegraIA: azul marino profundo, cian eléctrico, teal y blanco brillante */
+@theme {
+  --color-ink-950: #030814;
+  --color-ink-900: #060f24;
+  --color-ink-800: #0a1833;
+  --color-ink-700: #12244a;
+  --color-cyan-electric: #00e5ff;
+  --color-teal-glow: #14b8a6;
+  --color-gold: #d4a64a;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-grotesk), var(--font-inter), ui-sans-serif, sans-serif;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.55; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-ink-950 text-slate-300 antialiased;
+  }
+  ::selection {
+    @apply bg-cyan-400/30 text-white;
+  }
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+@utility section {
+  @apply relative py-20 sm:py-28;
+}
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-400/5 px-3 py-1 text-xs font-semibold tracking-wider text-cyan-300 uppercase;
+}
+@utility h2 {
+  @apply font-display text-3xl font-bold tracking-tight text-balance text-white sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1];
+}
+@utility lead {
+  @apply text-base leading-relaxed text-pretty text-slate-400 sm:text-lg;
+}
+@utility card {
+  @apply rounded-2xl border border-white/[0.07] bg-gradient-to-b from-white/[0.05] to-white/[0.015] backdrop-blur-sm;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 sm:text-base;
+}
+@utility btn-primary {
+  @apply btn bg-gradient-to-r from-cyan-400 to-teal-400 text-ink-950 shadow-[0_0_30px_-6px_rgba(0,229,255,0.6)] hover:shadow-[0_0_44px_-4px_rgba(0,229,255,0.8)] hover:brightness-110;
+}
+@utility btn-ghost {
+  @apply btn border border-white/15 bg-white/[0.03] text-white hover:border-cyan-400/50 hover:bg-cyan-400/10;
+}
+@utility text-gradient {
+  @apply bg-gradient-to-r from-cyan-300 via-cyan-electric to-teal-300 bg-clip-text text-transparent;
+}
+@utility input {
+  @apply w-full rounded-xl border border-white/10 bg-ink-900/80 px-4 py-3 text-white placeholder:text-slate-500 transition outline-none focus:border-cyan-400/60 focus:ring-2 focus:ring-cyan-400/20;
+}
+
+/* Fondo de “circuitos”: retícula sutil con desvanecido radial */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Impresión / PDF de la propuesta: fondo blanco y texto oscuro legible */
+@media print {
+  body { background: #fff !important; }
+  .bg-grid { display: none; }
+  #propuesta, #propuesta * {
+    color: #0a1833 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    -webkit-text-fill-color: #0a1833 !important;
+  }
+  #propuesta * { border-color: #cbd5e1 !important; }
+}
