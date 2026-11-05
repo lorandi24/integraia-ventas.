@@ -53,7 +53,12 @@ export function Testimonials() {
         {/* Videos de alumnos */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {videos.map((v) => (
-            <figure key={v.src} className="card mx-auto flex w-full max-w-sm flex-col overflow-hidden p-2">
+            <figure
+              key={v.src}
+              className={`card mx-auto flex w-full flex-col overflow-hidden p-2 ${
+                "wide" in v && v.wide ? "max-w-3xl sm:col-span-2 lg:col-span-3" : "max-w-sm"
+              }`}
+            >
               <video
                 controls
                 playsInline
@@ -61,7 +66,8 @@ export function Testimonials() {
                 poster={v.poster}
                 width={v.width}
                 height={v.height}
-                className="aspect-[540/602] w-full rounded-xl bg-ink-950 object-cover"
+                style={{ aspectRatio: `${v.width} / ${v.height}` }}
+                className="w-full rounded-xl bg-ink-950 object-cover"
                 aria-label={`Testimonio en video de ${v.name}`}
               >
                 <source src={v.src} type="video/mp4" />

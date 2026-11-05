@@ -231,7 +231,8 @@ export const testimonials = {
     {
       name: "Patricia Magaña",
       role: "Agente inmobiliaria",
-      summary: "",
+      summary:
+        "La IA le resolvió cuestiones de trabajo, le ayuda a rendir mejor su tiempo y la apoya en su imagen personal y en sus proyectos.",
       src: "/testimonios/patricia.mp4",
       poster: "/testimonios/patricia-poster.webp",
       width: 540,
@@ -241,12 +242,25 @@ export const testimonials = {
     {
       name: "Juan Rodríguez",
       role: "Diseñador gráfico",
-      summary: "",
+      summary:
+        "Con IA mejora las imágenes de sus proyectos e implementa branding para sus clientes, entre otras tareas.",
       src: "/testimonios/juan.mp4",
       poster: "/testimonios/juan-poster.webp",
       width: 540,
       height: 602,
       quote: "",
+    },
+    {
+      name: "Gonzalo Aguilar Hoil",
+      role: "Capacitador en el sector bancario",
+      summary: "",
+      src: "/testimonios/gonzalo.mp4",
+      poster: "/testimonios/gonzalo-poster.webp",
+      width: 848,
+      height: 478,
+      quote: "",
+      /** Video horizontal: se muestra a todo lo ancho debajo de los verticales. */
+      wide: true,
     },
   ],
   /** Formación del instructor (constancia verificable con QR). */
