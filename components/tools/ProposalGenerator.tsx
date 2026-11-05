@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { packages } from "@/lib/content";
 import { formatMXN } from "@/lib/format";
 import { waLink } from "@/lib/site";
 import { Icon, WhatsAppIcon } from "../Icon";
@@ -103,7 +104,7 @@ function ProposalView({ p }: { p: Proposal }) {
   const fecha = new Date().toLocaleDateString("es-MX", { day: "numeric", month: "long", year: "numeric" });
   const msg = `Hola IntegraIA 👋 Generé una propuesta para ${p.empresa} (${p.giro}).\n\nSoluciones:\n${p.items
     .map((i) => `• ${i.solution}`)
-    .join("\n")}\n\nPaquete sugerido: ${p.paquete}\nInversión estimada: ${formatMXN(p.cost)} + IVA\nTiempo: ${p.weeks} semanas\nInicio: ${p.urgencia}\n\nQuiero revisarla con un consultor.`;
+    .join("\n")}\n\nPaquete sugerido: ${p.paquete}\n${packages.showPrices ? `Inversión estimada: ${formatMXN(p.cost)} + IVA\n` : ""}Tiempo: ${p.weeks} semanas\nInicio: ${p.urgencia}\n\nQuiero revisarla con un consultor.`;
 
   return (
     <article id="propuesta" className="card scroll-mt-24 overflow-hidden print:border-0 print:bg-white print:text-black">
@@ -132,7 +133,11 @@ function ProposalView({ p }: { p: Proposal }) {
         <section className="grid gap-4 sm:grid-cols-3">
           <Stat label="Paquete sugerido" value={p.paquete} />
           <Stat label="Tiempo de implementación" value={`${p.weeks} semanas`} />
-          <Stat label="Inversión estimada" value={`${formatMXN(p.cost)} + IVA`} accent />
+          <Stat
+            label="Inversión estimada"
+            value={packages.showPrices ? `${formatMXN(p.cost)} + IVA` : "Se define en tu diagnóstico"}
+            accent
+          />
         </section>
 
         <section>
@@ -153,7 +158,7 @@ function ProposalView({ p }: { p: Proposal }) {
           </button>
         </div>
         <p className="text-xs text-slate-500">
-          Estimación preliminar generada automáticamente. El precio final se confirma tras el diagnóstico.
+          Estimación preliminar generada automáticamente. La inversión final se confirma tras el diagnóstico gratuito.
         </p>
       </div>
     </article>

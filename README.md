@@ -47,6 +47,8 @@ public/
 | Qué cambiar | Dónde |
 |---|---|
 | Textos, precios de paquetes, FAQ, testimonios | `lib/content.ts` |
+| Mostrar u ocultar precios en todo el sitio | `packages.showPrices` en `lib/content.ts` |
+| Videos de testimonios | archivos en `public/testimonios/` + lista `testimonials.videos` en `lib/content.ts` |
 | Número de WhatsApp, ciudad, URL | `lib/site.ts` o variables de entorno |
 | Colores y tipografía | bloque `@theme` en `app/globals.css` |
 | Preguntas del diagnóstico | `components/tools/Diagnostic.tsx` |
@@ -88,7 +90,17 @@ También funciona en cualquier hosting con Node (`npm run build && npm start`).
 
 ## Antes de publicar
 
-- [ ] Sustituye los **escenarios de resultados** (`testimonials` en `lib/content.ts`) por testimonios reales de clientes, con su autorización.
-- [ ] Revisa precios y alcances de los paquetes.
+- [ ] Confirma que cada alumno que aparece en video autorizó publicar su imagen.
+- [ ] Agrega una frase textual de cada video en `quote` (`testimonials.videos`).
+- [ ] Define precios y activa `showPrices: true` (o déjalo en `false` para “Precio a la medida”).
 - [ ] Configura `NEXT_PUBLIC_SITE_URL` con tu dominio final.
 - [ ] (Opcional) Agrega Google Analytics / Meta Pixel en `app/layout.tsx` para medir conversiones.
+
+### Agregar otro video de testimonio
+
+```bash
+ffmpeg -i original.mp4 -vf "scale=540:-2" -c:v libx264 -crf 27 -preset slow -c:a aac -b:a 96k -movflags +faststart public/testimonios/nombre.mp4
+ffmpeg -ss 5 -i public/testimonios/nombre.mp4 -frames:v 1 public/testimonios/nombre-poster.jpg
+```
+
+Después agrega su entrada en `testimonials.videos`.

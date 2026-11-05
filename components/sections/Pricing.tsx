@@ -11,7 +11,7 @@ export function Pricing() {
         aria-hidden="true"
       />
       <div className="container-x relative">
-        <SectionHeader eyebrow={packages.eyebrow} title={packages.title} subtitle={packages.subtitle} />
+        <SectionHeader eyebrow={packages.eyebrow} title={packages.title} subtitle={packages.showPrices ? packages.subtitleWithPrices : packages.subtitle} />
 
         <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3">
           {packages.items.map((p) => (
@@ -30,10 +30,17 @@ export function Pricing() {
               )}
               <h3 className="font-display text-xl font-semibold text-white">{p.name}</h3>
               <p className="mt-2 text-sm text-slate-400">{p.description}</p>
-              <p className="mt-6 flex items-baseline gap-2">
-                <span className="font-display text-4xl font-bold text-white">{p.price}</span>
-                <span className="text-sm text-slate-400">MXN {p.period}</span>
-              </p>
+              {packages.showPrices ? (
+                <p className="mt-6 flex items-baseline gap-2">
+                  <span className="font-display text-4xl font-bold text-white">{p.price}</span>
+                  <span className="text-sm text-slate-400">MXN {p.period}</span>
+                </p>
+              ) : (
+                <p className="mt-6">
+                  <span className="font-display text-2xl font-bold text-white">Precio a la medida</span>
+                  <span className="mt-1 block text-sm text-slate-400">Modalidad: {p.period}</span>
+                </p>
+              )}
               <ul className="mt-7 flex-1 space-y-3">
                 {p.features.map((f) => (
                   <li key={f} className="flex gap-3 text-sm text-slate-300">

@@ -8,6 +8,7 @@ export const nav = [
   { label: "Problema", href: "#problema" },
   { label: "Herramientas", href: "#herramientas" },
   { label: "Cómo funciona", href: "#como-funciona" },
+  { label: "Testimonios", href: "#testimonios" },
   { label: "Paquetes", href: "#paquetes" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -131,7 +132,13 @@ export const benefits = {
 export const packages = {
   eyebrow: "Paquetes",
   title: "Elige cómo quieres empezar",
-  subtitle: "Precios en pesos mexicanos, más IVA. Sin contratos forzosos.",
+  /**
+   * Interruptor de precios. En `false` se muestra "Precio a la medida" y los precios
+   * no aparecen en ninguna parte del sitio (paquetes ni generador de propuestas).
+   */
+  showPrices: false,
+  subtitle: "Cada negocio es distinto: te damos tu inversión exacta en el diagnóstico gratuito. Sin contratos forzosos.",
+  subtitleWithPrices: "Precios en pesos mexicanos, más IVA. Sin contratos forzosos.",
   items: [
     {
       name: "Arranque IA",
@@ -183,33 +190,41 @@ export const packages = {
 };
 
 export const testimonials = {
-  eyebrow: "Resultados",
-  title: "Así se ve la IA trabajando en una pyme",
-  note: "Escenarios ilustrativos basados en procesos típicos de pymes mexicanas.",
-  items: [
+  eyebrow: "Testimonios",
+  title: "Lo que dicen quienes ya aprendieron con nosotros",
+  subtitle: "Alumnos reales de nuestro programa presencial IA desde Cero.",
+  /** Videos reales. `quote` es opcional: una frase textual del alumno (se muestra si no está vacía). */
+  videos: [
+    {
+      name: "Marco",
+      role: "Alumno · IA desde Cero",
+      src: "/testimonios/marco.mp4",
+      poster: "/testimonios/marco-poster.webp",
+      width: 540,
+      height: 602,
+      quote: "",
+    },
+  ],
+  program: {
+    name: "IA desde Cero",
+    text: "Programa presencial para dueños y equipos: conceptos, estructura de prompts, asistentes personalizados y conexión de herramientas digitales.",
+    facts: ["16 horas", "4 sábados", "Presencial", "Reconocimiento de participación"],
+  },
+  /** Escenarios ilustrativos de implementación (no son testimonios). */
+  scenariosTitle: "Así se ve la IA trabajando en una pyme",
+  scenariosNote: "Escenarios ilustrativos basados en procesos típicos de pymes mexicanas.",
+  scenarios: [
     {
       business: "Distribuidora de materiales",
-      place: "Mérida, Yuc.",
-      quote:
-        "Las cotizaciones que tomaban un día ahora salen en 10 minutos. El asistente de WhatsApp atiende fuera de horario y pasa al vendedor sólo los clientes listos para comprar.",
-      metric: "+32%",
-      metricLabel: "cotizaciones cerradas",
+      text: "Cotizaciones que tomaban un día salen en minutos; el asistente de WhatsApp atiende fuera de horario y pasa al vendedor sólo a los clientes listos para comprar.",
     },
     {
       business: "Clínica dental",
-      place: "Guadalajara, Jal.",
-      quote:
-        "Confirmación de citas y recordatorios automáticos. La recepcionista dejó de pasar la mañana al teléfono y ahora se enfoca en atender a los pacientes en sitio.",
-      metric: "-45%",
-      metricLabel: "citas no asistidas",
+      text: "Confirmación de citas y recordatorios automáticos: menos inasistencias y una recepción enfocada en los pacientes en sitio.",
     },
     {
       business: "Despacho contable",
-      place: "Monterrey, N.L.",
-      quote:
-        "La IA clasifica documentos, redacta correos y prepara reportes para clientes. El equipo recuperó más de 12 horas a la semana sin contratar a nadie.",
-      metric: "12 h",
-      metricLabel: "ahorradas por semana",
+      text: "La IA clasifica documentos, redacta correos y prepara reportes: el equipo recupera horas cada semana sin contratar a nadie.",
     },
   ],
 };
@@ -237,7 +252,7 @@ export const faq = [
   },
   {
     q: "¿Emiten factura?",
-    a: "Sí, todos nuestros servicios se facturan. Los precios publicados son más IVA.",
+    a: "Sí, todos nuestros servicios se facturan.",
   },
 ];
 

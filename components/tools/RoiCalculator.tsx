@@ -14,6 +14,7 @@ type Inputs = {
   prospectos: number;
   ticket: number;
   cierre: number;
+  inversion: number;
 };
 
 const fields: Field[] = [
@@ -23,12 +24,12 @@ const fields: Field[] = [
   { key: "automatizable", label: "Porcentaje que se puede automatizar", min: 10, max: 80, step: 5, suffix: "%" },
   { key: "prospectos", label: "Prospectos o consultas al mes", min: 0, max: 1000, step: 10 },
   { key: "ticket", label: "Venta promedio por cliente", min: 0, max: 100000, step: 500, prefix: "$" },
-  { key: "cierre", label: "Tasa de cierre actual", min: 1, max: 60, step: 1, suffix: "%" },
+  { key: "cierre", label: "Tasa de cierre: de cada 100 interesados, ¿cuántos te compran?", min: 1, max: 60, step: 1, suffix: "%" },
+  { key: "inversion", label: "Inversión que contemplas en IA", min: 3000, max: 100000, step: 1000, prefix: "$" },
 ];
 
 /** Mejora relativa conservadora en cierre por respuesta inmediata y seguimiento automático. */
 const MEJORA_CIERRE = 0.15;
-const INVERSION_REFERENCIA = 14900;
 const SEMANAS_MES = 4.33;
 
 export function RoiCalculator() {
@@ -40,13 +41,14 @@ export function RoiCalculator() {
     prospectos: 120,
     ticket: 3500,
     cierre: 15,
+    inversion: 15000,
   });
 
   const horasMes = v.personas * v.horas * SEMANAS_MES * (v.automatizable / 100);
   const ahorro = horasMes * v.costoHora;
   const ventasExtra = v.prospectos * (v.cierre / 100) * MEJORA_CIERRE * v.ticket;
   const total = ahorro + ventasExtra;
-  const recuperacion = total > 0 ? INVERSION_REFERENCIA / total : Infinity;
+  const recuperacion = total > 0 ? v.inversion / total : Infinity;
   const recuperacionTxt =
     recuperacion < 1 ? `${Math.max(1, Math.round(recuperacion * 30))} días` : Number.isFinite(recuperacion) ? `${recuperacion.toFixed(1)} meses` : "—";
 
@@ -97,8 +99,8 @@ export function RoiCalculator() {
           <WhatsAppIcon /> Validar mi ROI gratis
         </a>
         <p className="text-xs leading-relaxed text-slate-500">
-          Estimación orientativa. Considera una mejora conservadora de {MEJORA_CIERRE * 100}% en tu tasa de cierre y una inversión
-          de referencia de {formatMXN(INVERSION_REFERENCIA)} (paquete Impulso IA).
+          Estimación orientativa con tus propios números. Supone una mejora conservadora de {MEJORA_CIERRE * 100}% en tu tasa de
+          cierre gracias a respuesta inmediata y seguimiento automático.
         </p>
       </div>
     </div>
