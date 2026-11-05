@@ -7,7 +7,7 @@ import { SmartLink } from "../SmartLink";
 
 /** Testimonios reales en video (sin JS: <video> nativo con preload="none") + escenarios ilustrativos. */
 export function Testimonials() {
-  const { videos, program, caseStudy } = testimonials;
+  const { videos, program, credential, caseStudy } = testimonials;
   return (
     <section id="testimonios" className="section border-y border-white/[0.05] bg-ink-900/50">
       <div className="container-x">
@@ -50,36 +50,38 @@ export function Testimonials() {
           </article>
         )}
 
-        <div className="mt-14 grid items-center gap-8 lg:grid-cols-[auto_1fr] lg:gap-12">
-          <div className={`grid gap-6 ${videos.length > 1 ? "sm:grid-cols-2" : ""}`}>
-            {videos.map((v) => (
-              <figure key={v.src} className="card mx-auto w-full max-w-sm overflow-hidden p-2">
-                <video
-                  controls
-                  playsInline
-                  preload="none"
-                  poster={v.poster}
-                  width={v.width}
-                  height={v.height}
-                  className="aspect-[540/602] w-full rounded-xl bg-ink-950 object-cover"
-                  aria-label={`Testimonio en video de ${v.name}`}
-                >
-                  <source src={v.src} type="video/mp4" />
-                </video>
-                <figcaption className="px-3 pt-4 pb-2">
-                  {"quote" in v && v.quote ? (
-                    <blockquote className="mb-3 text-sm leading-relaxed text-slate-300">“{v.quote}”</blockquote>
-                  ) : null}
-                  <span className="block text-sm font-semibold text-white">{v.name}</span>
-                  <span className="text-xs text-slate-400">{v.role}</span>
-                  {"summary" in v && v.summary ? (
-                    <p className="mt-3 border-t border-white/[0.06] pt-3 text-sm leading-relaxed text-slate-300">{v.summary}</p>
-                  ) : null}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+        {/* Videos de alumnos */}
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {videos.map((v) => (
+            <figure key={v.src} className="card mx-auto flex w-full max-w-sm flex-col overflow-hidden p-2">
+              <video
+                controls
+                playsInline
+                preload="none"
+                poster={v.poster}
+                width={v.width}
+                height={v.height}
+                className="aspect-[540/602] w-full rounded-xl bg-ink-950 object-cover"
+                aria-label={`Testimonio en video de ${v.name}`}
+              >
+                <source src={v.src} type="video/mp4" />
+              </video>
+              <figcaption className="px-3 pt-4 pb-2">
+                {v.quote ? (
+                  <blockquote className="mb-3 text-sm leading-relaxed text-slate-300">“{v.quote}”</blockquote>
+                ) : null}
+                <span className="block text-sm font-semibold text-white">{v.name}</span>
+                <span className="text-xs text-slate-400">{v.role}</span>
+                {v.summary ? (
+                  <p className="mt-3 border-t border-white/[0.06] pt-3 text-sm leading-relaxed text-slate-300">{v.summary}</p>
+                ) : null}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
 
+        {/* Programa + formación del instructor */}
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <div className="card relative overflow-hidden p-7 sm:p-9">
             <div
               className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-cyan-400/10 blur-3xl"
@@ -111,12 +113,38 @@ export function Testimonials() {
                 alt={program.certificate.alt}
                 width={program.certificate.width}
                 height={program.certificate.height}
-                sizes="(min-width: 1024px) 560px, 90vw"
+                sizes="(min-width: 1024px) 540px, 90vw"
                 className="h-auto w-full transition duration-300 group-hover:scale-[1.02]"
               />
             </a>
             <p className="mt-2 text-xs text-slate-500">Reconocimiento que recibe cada participante al concluir.</p>
-            <SmartLink href={site.tools.diagnostico} className="btn-primary mt-8">
+          </div>
+
+          <div className="card relative flex flex-col overflow-hidden p-7 sm:p-9">
+            <span className="text-xs font-semibold tracking-wider text-teal-300 uppercase">{credential.label}</span>
+            <h3 className="font-display mt-2 text-2xl font-bold text-white sm:text-3xl">{credential.title}</h3>
+            <p className="mt-4 leading-relaxed text-slate-300">
+              {credential.holder} · {credential.issuer}
+            </p>
+            <p className="mt-1 text-sm text-slate-400">{credential.detail}</p>
+            <a
+              href={credential.pdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-7 block overflow-hidden rounded-xl border border-white/10 bg-white transition hover:border-cyan-400/50"
+              aria-label="Ver constancia en PDF"
+            >
+              <Image
+                src={credential.image}
+                alt={`Constancia del curso ${credential.title}`}
+                width={credential.width}
+                height={credential.height}
+                sizes="(min-width: 1024px) 540px, 90vw"
+                className="h-auto w-full transition duration-300 group-hover:scale-[1.02]"
+              />
+            </a>
+            <p className="mt-2 text-xs text-slate-500">Verificable con el código QR de la constancia. Clic para ver el PDF.</p>
+            <SmartLink href={site.tools.diagnostico} className="btn-primary mt-8 self-start">
               Empieza con tu diagnóstico gratuito
               <Icon name="arrow" className="h-5 w-5" />
             </SmartLink>
