@@ -103,4 +103,9 @@ ffmpeg -i original.mp4 -vf "scale=540:-2" -c:v libx264 -crf 27 -preset slow -c:a
 ffmpeg -ss 5 -i public/testimonios/nombre.mp4 -frames:v 1 public/testimonios/nombre-poster.jpg
 ```
 
-Después agrega su entrada en `testimonials.videos`.
+Después agrega su entrada en `testimonials.videos` (`summary` = resumen sin comillas; `quote` = sólo frases textuales).
+
+### Activar el caso destacado (video de la directora)
+
+1. Guarda el video como `public/testimonios/directora.mp4` y su portada como `public/testimonios/directora-poster.webp`.
+2. En `lib/content.ts` → `testimonials.caseStudy`: pon `enabled: true`, ajusta `width`/`height` del video y agrega 2–3 resultados en `results`.

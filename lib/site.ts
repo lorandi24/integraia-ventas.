@@ -4,7 +4,7 @@
 export const site = {
   name: "IntegraIA by EMET",
   shortName: "IntegraIA",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://integraia.mx",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://integraia-ventas.vercel.app",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "5219992978891",
   whatsappDisplay: "+52 999 297 8891",
   city: "Mérida, Yucatán",

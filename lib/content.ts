@@ -192,12 +192,36 @@ export const packages = {
 export const testimonials = {
   eyebrow: "Testimonios",
   title: "Lo que dicen quienes ya aprendieron con nosotros",
-  subtitle: "Alumnos reales de nuestro programa presencial IA desde Cero.",
-  /** Videos reales. `quote` es opcional: una frase textual del alumno (se muestra si no está vacía). */
+  subtitle: "Dueños de negocio y profesionales reales de nuestro programa presencial IA desde Cero.",
+  /**
+   * Caso propio destacado (video de la directora del centro de asesorías EMET).
+   * Pon `enabled: true` cuando el video esté en public/testimonios/. `results` es opcional.
+   */
+  caseStudy: {
+    enabled: false,
+    eyebrow: "Caso real · Lo aplicamos primero en casa",
+    title: "Centro de asesorías EMET",
+    text: "Antes de recomendar IA a otros negocios, la implementamos en nuestro propio centro de asesorías: automatizaciones, simuladores y aplicaciones que hoy usa todo el equipo.",
+    results: [] as string[],
+    video: {
+      name: "Directora",
+      role: "Centro de asesorías EMET",
+      src: "/testimonios/directora.mp4",
+      poster: "/testimonios/directora-poster.webp",
+      width: 540,
+      height: 960,
+    },
+  },
+  /**
+   * Videos reales. `summary` resume lo que cuenta la persona (se muestra sin comillas).
+   * `quote` es opcional: sólo para frases textuales, se muestra entre comillas.
+   */
   videos: [
     {
       name: "Marco",
-      role: "Alumno · IA desde Cero",
+      role: "Dueño de negocio de comedores industriales",
+      summary:
+        "Hoy usa la IA para que su personal gestione los reportes y para reducir la carga de trabajo de su equipo. Para él es una gran herramienta, con mucho todavía por aprovechar.",
       src: "/testimonios/marco.mp4",
       poster: "/testimonios/marco-poster.webp",
       width: 540,
@@ -209,6 +233,12 @@ export const testimonials = {
     name: "IA desde Cero",
     text: "Programa presencial para dueños y equipos: conceptos, estructura de prompts, asistentes personalizados y conexión de herramientas digitales.",
     facts: ["16 horas", "4 sábados", "Presencial", "Reconocimiento de participación"],
+    certificate: {
+      src: "/testimonios/certificado-ia-desde-cero.webp",
+      width: 1400,
+      height: 990,
+      alt: "Reconocimiento del curso IA desde Cero otorgado por IntegraIA",
+    },
   },
   /** Escenarios ilustrativos de implementación (no son testimonios). */
   scenariosTitle: "Así se ve la IA trabajando en una pyme",
